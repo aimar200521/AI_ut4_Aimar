@@ -23,12 +23,6 @@ public class Cubo {
     public float getLado() {
         return lado;
     }
-
-    /**
-     * Setter del lado.
-     *
-     * @param lado nuevo valor del lado
-     */
     public void setLado(float lado) {
         this.lado = lado;
     }
