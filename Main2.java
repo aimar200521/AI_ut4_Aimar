@@ -1,39 +1,32 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import javax.swing.JOptionPane;
 
 public class Main2 {
 
     public static void main(String[] args) {
 
-        Cubo cubo1 = new Cubo(Cubo.solicitarLado());
-        Cubo cubo2 = new Cubo(Cubo.solicitarLado());
-        Cubo cubo3 = new Cubo(Cubo.solicitarLado());
+        Cubo cubo1 = new Cubo(3);
+        Cubo cubo2 = new Cubo(5);
+        Cubo cubo3 = new Cubo(2);
 
-        cubo1.mostrarAreaBase();
-        cubo1.mostrarVolumen();
+        GestorCubos gestor = new GestorCubos();
 
-        cubo2.mostrarAreaBase();
-        cubo2.mostrarVolumen();
+        gestor.inicializarCubos(new Cubo[]{cubo1, cubo2, cubo3});
 
-        cubo3.mostrarAreaBase();
-        cubo3.mostrarVolumen();
+        gestor.ordenarCubos();
 
-        Cubo mayor = cubo1;
-
-        if (cubo2.calcularVolumen() > mayor.calcularVolumen()) {
-            mayor = cubo2;
+        String resultado = "Cubos ordenados por volumen:\n";
+        for (Cubo c : gestor.getListaCubos()) {
+            resultado += "Lado: " + c.getLado() + " Volumen: " + c.calcularVolumen() + "\n";
         }
 
-        if (cubo3.calcularVolumen() > mayor.calcularVolumen()) {
-            mayor = cubo3;
-        }
+        JOptionPane.showMessageDialog(null, resultado);
+
+        boolean cabe = gestor.cabeDentro(cubo3, cubo2);
 
         JOptionPane.showMessageDialog(null,
-                "El cubo con mayor volumen tiene lado: " + mayor.getLado() +
-                        "\nVolumen: " + mayor.calcularVolumen());
+                "El cubo de lado " + cubo3.getLado() +
+                        " cabe en el de lado " + cubo2.getLado() + ": " + cabe);
     }
 }
-
